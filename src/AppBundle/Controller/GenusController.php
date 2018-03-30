@@ -21,13 +21,8 @@ class GenusController extends Controller
      */
     public function showAction(string $genusName) : Response
     {
-        // for some reason, the templating service is not currently available in the container so we'll use the twig one.
-        $templating = $this->container->get('twig');
-
-        $html = $templating->render('genus/show.html.twig', [
+        return $this->render('genus/show.html.twig', [
             'name' => $genusName
         ]);
-
-        return new Response($html);
     }
 }
