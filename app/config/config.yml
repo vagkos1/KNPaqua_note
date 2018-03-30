@@ -68,3 +68,8 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+doctrine_cache:
+    providers:
+        my_markdown_cache:
+            type: file_system
+
