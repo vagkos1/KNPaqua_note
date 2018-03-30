@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vagkos
- * Date: 30/03/18
- * Time: 19:19
- */
 
 namespace AppBundle\Controller;
 
 
-class MainController
-{
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
+class MainController extends Controller
+{
+    public function homepageAction() : Response
+    {
+        return $this->render('main/homepage.html.twig');
+    }
 }
