@@ -1,6 +1,10 @@
 imports:
     - { resource: config.yml }
 
+parameters:
+#fake caching for the dev environment (no caching!)
+    cache_type: array
+
 framework:
     router:
         resource: '%kernel.project_dir%/app/config/routing_dev.yml'
@@ -39,9 +43,3 @@ monolog:
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
-
-#fake caching for the dev environment (no caching!)
-doctrine_cache:
-    providers:
-        my_markdown_cache:
-            type: array
