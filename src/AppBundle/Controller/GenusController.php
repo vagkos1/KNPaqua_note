@@ -29,6 +29,8 @@ class GenusController extends Controller
     }
 
     /**
+     * This powers our React frontend
+     *
      * @Route("/genus/{genusName}/notes", name="genus_show_notes")
      * @Method("GET")
      */
