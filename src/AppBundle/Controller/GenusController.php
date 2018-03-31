@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Genus;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +19,25 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GenusController extends Controller
 {
+    /**
+     * Should be above the showAction controller so that it takes precedence when they visit /genus/new
+     * @Route("/genus/new")
+     */
+    public function newAction() : Response
+    {
+        $genus = New Genus();
+        $genus->setName('Octopus'.rand(1,100));
+
+        // Entity Manager
+        $em = $this->getDoctrine()->getManager();
+
+        // Save in the DB!
+        $em->persist($genus);
+        $em->flush();
+
+        return new Response('<html><body>Genus created!</body></html>');
+    }
+
     /**
      * @Route("/genus/{genusName}")
      */
@@ -36,8 +56,6 @@ class GenusController extends Controller
                 ->transform($funFact);
             $cache->save($key, $funFact);
         }
-
-
 
         return $this->render('genus/show.html.twig', [
             'name' => $genusName,
