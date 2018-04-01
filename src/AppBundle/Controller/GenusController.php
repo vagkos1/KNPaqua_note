@@ -55,7 +55,7 @@ class GenusController extends Controller
         // can also use "AppBundle\Entity\Genus" but the shorthand provided is more common
         $genuses = $em->getRepository('AppBundle:Genus')
             ->findAll();
-        
+
         return $this->render('genus/list.html.twig', [
            'genuses' => $genuses
         ]);
