@@ -26,7 +26,7 @@ class GenusController extends Controller
      */
     public function newAction() : Response
     {
-        $genus = New Genus();
+        $genus = new Genus();
         $genus->setName('Octopus'.rand(1,100));
         $genus->setSubFamily('Octopodinae');
         $genus->setSpeciesCount(rand(100, 99999));
@@ -55,7 +55,7 @@ class GenusController extends Controller
         // can also use "AppBundle\Entity\Genus" but the shorthand provided is more common
         $genuses = $em->getRepository('AppBundle:Genus')
             ->findAll();
-
+        
         return $this->render('genus/list.html.twig', [
            'genuses' => $genuses
         ]);
