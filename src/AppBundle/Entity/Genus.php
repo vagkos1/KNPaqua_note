@@ -41,7 +41,7 @@ class Genus
     /**
      * @return string
      */
-    public function getName() : string
+    public function getName()
     {
         return $this->name;
     }
@@ -49,7 +49,7 @@ class Genus
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -57,7 +57,7 @@ class Genus
     /**
      * @return string
      */
-    public function getSubFamily() : string
+    public function getSubFamily()
     {
         return $this->subFamily;
     }
@@ -65,23 +65,23 @@ class Genus
     /**
      * @param mixed $subFamily
      */
-    public function setSubFamily($subFamily): void
+    public function setSubFamily($subFamily)
     {
         $this->subFamily = $subFamily;
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
-    public function getSpeciesCount() : integer
+    public function getSpeciesCount()
     {
         return $this->speciesCount;
     }
 
     /**
-     * @param mixed $speciesCount
+     * @param integer $speciesCount
      */
-    public function setSpeciesCount($speciesCount): void
+    public function setSpeciesCount($speciesCount)
     {
         $this->speciesCount = $speciesCount;
     }
@@ -89,7 +89,7 @@ class Genus
     /**
      * @return string
      */
-    public function getFunFact() : string
+    public function getFunFact()
     {
         return $this->funFact;
     }
@@ -97,8 +97,13 @@ class Genus
     /**
      * @param mixed $funFact
      */
-    public function setFunFact($funFact): void
+    public function setFunFact($funFact)
     {
         $this->funFact = $funFact;
+    }
+
+    public function getUpdatedAt()
+    {
+        return new \DateTime('-'.rand(0,100).'days');
     }
 }

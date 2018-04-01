@@ -41,6 +41,25 @@ class GenusController extends Controller
     }
 
     /**
+     * @Route("/genus")
+     * @return Response
+     */
+    public function listAction() : Response
+    {
+        // whenever we want to interact with the DB, we grab the doctrine's Entity Manager
+        $em = $this->getDoctrine()->getManager();
+
+        // Get stuff out of the DB via Doctrine: use a repository
+        // can also use "AppBundle\Entity\Genus" but the shorthand provided is more common
+        $genuses = $em->getRepository('AppBundle:Genus')
+            ->findAll();
+
+        return $this->render('genus/list.html.twig', [
+           'genuses' => $genuses
+        ]);
+    }
+
+    /**
      * @Route("/genus/{genusName}")
      */
     public function showAction(string $genusName) : Response
