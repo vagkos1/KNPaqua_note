@@ -29,6 +29,11 @@ class Genus
     private $subFamily;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $speciesCount;
@@ -65,7 +70,7 @@ class Genus
     /**
      * @param mixed $subFamily
      */
-    public function setSubFamily($subFamily)
+    public function setSubFamily(string $subFamily)
     {
         $this->subFamily = $subFamily;
     }
@@ -95,9 +100,9 @@ class Genus
     }
 
     /**
-     * @param mixed $funFact
+     * @param string $funFact
      */
-    public function setFunFact($funFact)
+    public function setFunFact(string $funFact)
     {
         $this->funFact = $funFact;
     }
@@ -106,4 +111,13 @@ class Genus
     {
         return new \DateTime('-'.rand(0,100).'days');
     }
+
+    /**
+     * @param boolean $isPublished
+     */
+    public function setIsPublished(bool $isPublished)
+    {
+        $this->isPublished = $isPublished;
+    }
 }
+
