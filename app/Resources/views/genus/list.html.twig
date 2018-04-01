@@ -14,9 +14,9 @@
             {% for genus in genuses %}
                 <tr>
                     {# Twig understands to call genus.getName() since genus.name is private#}
-                    <td>{{ genus.name }}</td>
+                    <td><a href="{{ path('genus_show', {'genusName': genus.name}) }}">{{ genus.name }}</a></td>
                     <td>{{ genus.speciesCount }}</td>
-                    
+
                     {# Twig doesn't care that there's no genus.updatedAt property as long as it can call genus.getUpdatedAt#}
                     <td>{{ genus.updatedAt | date('Y-m-d') }}</td>
                 </tr>
