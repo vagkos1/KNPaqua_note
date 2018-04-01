@@ -50,11 +50,12 @@ class GenusController extends Controller
     {
         // whenever we want to interact with the DB, we grab the doctrine's Entity Manager
         $em = $this->getDoctrine()->getManager();
-
+        dump($em->getRepository('AppBundle:Genus'));
         // Get stuff out of the DB via Doctrine: use a repository
         // can also use "AppBundle\Entity\Genus" but the shorthand provided is more common
+        // this is a Doctrine EntityRepository
         $genuses = $em->getRepository('AppBundle:Genus')
-            ->findAll();
+            ->findAllPublishedOrderedBySize();
 
         return $this->render('genus/list.html.twig', [
            'genuses' => $genuses
