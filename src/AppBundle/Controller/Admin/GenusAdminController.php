@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Genus;
 use AppBundle\Form\GenusFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -52,6 +53,36 @@ class GenusAdminController extends Controller
         }
 
         return $this->render('admin/genus/new.html.twig', [
+            'genusForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/genus/{id}/edit", name="admin_genus_edit")
+     */
+    public function editAction(Request $request, Genus $genus)
+    {
+        // the second argument represents the default data of the form (placeholders!)
+        $form = $this->createForm(GenusFormType::class, $genus);
+
+        // only handles data on POST.
+        // If the user just navigates to the form (GET), the handleRequest does nothing.
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $genus = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($genus);
+            $em->flush();
+
+            // gets the session service and adds a flashBag
+            $this->addFlash('success', 'Genus updated - you are amazing!');
+
+            return $this->redirectToRoute('admin_genus_list');
+        }
+
+        return $this->render('admin/genus/edit.html.twig', [
             'genusForm' => $form->createView()
         ]);
     }
