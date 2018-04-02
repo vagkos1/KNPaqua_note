@@ -7,7 +7,7 @@ use Doctrine\Common\Cache\Cache;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use Knp\Bundle\MarkdownBundle\Parser\MarkdownParser;
 
-class MarkDownTransformer
+class MarkdownTransformer
 {
     /** @var MarkdownParser */
     private $markdownParser;
@@ -28,7 +28,7 @@ class MarkDownTransformer
             return $this->cache->fetch($key);
         }
 
-        sleep(3);
+        sleep(1);
         $str = $this->markdownParser
             ->transformMarkdown($str);
         $this->cache->save($key, $str);
