@@ -78,6 +78,8 @@ class GenusController extends Controller
     public function showAction(string $genusName) : Response
     {
         $em = $this->getDoctrine()->getManager();
+
+        /** @var Genus $genus */
         $genus = $em->getRepository('AppBundle:Genus')
             ->findOneBy(['name' => $genusName]);
 
@@ -99,8 +101,16 @@ class GenusController extends Controller
         }
         */
 
+        // will fetch all the notes for this genus and then filter them.
+        // If there are too many of them then there will be a performance hit
+        $recentNotes = $genus->getNotes()
+            ->filter(function(GenusNote $note) {
+                return $note->getCreatedAt() > new \DateTime('-3 months');
+            });
+
         return $this->render('genus/show.html.twig', [
-            'genus' => $genus
+            'genus' => $genus,
+            'recentNoteCount' => count($recentNotes)
         ]);
     }
 
