@@ -40,6 +40,7 @@ class Genus
      *
      * mappedBy is the property in genusNote that forms the owning side of the relationship
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\GenusNote", mappedBy="genus")
+     * @ORM\OrderBy({"createdAt"="DESC"})
      */
     private $notes;
 
@@ -136,7 +137,7 @@ class Genus
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection|GenusNote[]
      */
     public function getNotes()
     {

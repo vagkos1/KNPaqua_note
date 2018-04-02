@@ -113,16 +113,16 @@ class GenusController extends Controller
      */
     public function getNotesAction(Genus $genus) : Response
     {
+        $notes = [];
         foreach ($genus->getNotes() as $note) {
-            dump($note);
+            $notes[] = [
+                'id' => $note->getId(),
+                'userName' => $note->getUsername(),
+                'avatarUri' => '/images/'.$note->getUserAvatarFilename(),
+                'note' => $note->getNote(),
+                'date' => $note->getCreatedAt()->format('M d, Y')
+            ];
         }
-
-        $notes = [
-            ['id' => 1, 'username' => 'AquaPelham', 'avatarUri' => '/images/leanna.jpeg', 'note' => 'Octopus asked me a riddle, outsmarted me!', 'date' => 'Dec. 10, 2016'],
-            ['id' => 2, 'username' => 'AquaWeaver', 'avatarUri' => '/images/ryan.jpeg', 'note' => 'I counted 8 legs... as they wrapped around me', 'date' => 'Dec. 1, 2016'],
-            ['id' => 3, 'username' => 'AquaPelham', 'avatarUri' => '/images/leanna.jpeg', 'note' => 'Inked', 'date' => 'Aug. 15, 2016'],
-        ];
-
         $data = [
           'notes' => $notes
         ];
