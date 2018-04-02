@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,6 +35,15 @@ class Genus
     private $isPublished = true;
 
     /**
+     * The inverse side of the relationship (only for reading data)
+     * cannot set notes on the inverse side (genus.notes), only on the owning side
+     *
+     * mappedBy is the property in genusNote that forms the owning side of the relationship
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GenusNote", mappedBy="genus")
+     */
+    private $notes;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $speciesCount;
@@ -42,6 +52,11 @@ class Genus
      * @ORM\Column(type="string", nullable=true)
      */
     private $funFact;
+
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -118,6 +133,14 @@ class Genus
     public function setIsPublished(bool $isPublished)
     {
         $this->isPublished = $isPublished;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }
 
