@@ -39,8 +39,16 @@ class GenusAdminController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
-            die();
+            $genus = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($genus);
+            $em->flush();
+
+            // gets the session service and adds a flashBag
+            $this->addFlash('success', 'Genus created - you are amazing!');
+
+            return $this->redirectToRoute('admin_genus_list');
         }
 
         return $this->render('admin/genus/new.html.twig', [
