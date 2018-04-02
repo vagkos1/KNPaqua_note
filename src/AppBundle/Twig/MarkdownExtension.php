@@ -5,7 +5,7 @@ namespace AppBundle\Twig;
 
 use AppBundle\Service\MarkdownTransformer;
 
-class MarkDownExtension extends \Twig_Extension
+class MarkdownExtension extends \Twig_Extension
 {
     private $markdownTransformer;
 
