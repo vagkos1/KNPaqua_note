@@ -1,0 +1,15 @@
+{{ form_start(genusForm) }}
+                {#Use form_widget to render all the fields at once. Simple, but we lose power over the labels etc.#}
+                {#https://symfony.com/doc/current/reference/forms/twig_reference.html#}
+                {{ form_row(genusForm.name) }}
+                {{ form_row(genusForm.subFamily) }}
+                {{ form_row(genusForm.speciesCount, {
+                    'label': 'Number of Species'
+                }) }}
+                {{ form_row(genusForm.funFact) }}
+                {{ form_row(genusForm.isPublished) }}
+                {{ form_row(genusForm.firstDiscoveredAt) }}
+
+<button type="submit" class="btn btn-primary" formnovalidate>Save</button>
+{#form_end uses a CSRF token behind the scenes#}
+                {{ form_end(genusForm) }}
