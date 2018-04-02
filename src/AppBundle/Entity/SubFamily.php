@@ -36,4 +36,12 @@ class SubFamily
     {
         $this->name = $name;
     }
+
+    /**
+     * to be used in Forms
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
