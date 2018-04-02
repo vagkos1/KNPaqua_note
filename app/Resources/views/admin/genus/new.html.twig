@@ -13,7 +13,9 @@
 
     <script>
         jQuery(document).ready(function() {
-            $('.js-datepicker').datepicker();
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
         });
 
     </script>
@@ -26,6 +28,7 @@
                 <h1>New Genus</h1>
 
                 {{ form_start(genusForm) }}
+                {#Use form_widget to render all the fields at once. Simple, but we lose power over the labels etc.#}
                     {{ form_widget(genusForm) }}
 
                     <button type="submit" class="btn btn-primary">Save</button>
