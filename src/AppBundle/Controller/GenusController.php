@@ -65,7 +65,7 @@ class GenusController extends Controller
         // can also use "AppBundle\Entity\Genus" but the shorthand provided is more common
         // this is a Doctrine EntityRepository or a GenusRepository that extends the generic EntityRepository
         $genuses = $em->getRepository('AppBundle:Genus')
-            ->findAllPublishedOrderedBySize();
+            ->findAllPublishedOrderedByRecentlyActive();
 
         return $this->render('genus/list.html.twig', [
            'genuses' => $genuses
