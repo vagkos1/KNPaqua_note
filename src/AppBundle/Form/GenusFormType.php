@@ -2,6 +2,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\SubFamily;
+use AppBundle\Repository\SubFamilyRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,9 +20,13 @@ class GenusFormType extends AbstractType
             // genus.subFamily is a M-1 to subFamily, so the builder will try to add a select dropdown.
             // We'll need a __toString() in subFamily for the values of that dropdown
             // By default Symfony uses a Form EntityType field for this and fetches the options by querying the Entity
-            // by using null as the second argument, Symfony will continue to use EntityType field and guess the class
-            ->add('subFamily', null, [
-                'placeholder' => 'Choose a Sub Family'
+            // but we can also explicitly set it so that it's more obvious
+            ->add('subFamily', EntityType::class, [
+                'placeholder' => 'Choose a Sub Family',
+                'class' => SubFamily::class,
+                'query_builder' => function (SubFamilyRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                },
             ])
             ->add('speciesCount')
             ->add('funFact')
@@ -27,7 +34,7 @@ class GenusFormType extends AbstractType
                 'choices' => [
                     'Yes' => true,
                     'No' => false
-                ]
+                ],
             ])
             ->add('firstDiscoveredAt')
         ;
