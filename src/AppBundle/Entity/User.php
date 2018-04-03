@@ -86,6 +86,4 @@ class User implements UserInterface
         // when changing the plainPassword (since we are not saving the plain password in the DB)
         $this->password = null;
     }
-
-
 }
