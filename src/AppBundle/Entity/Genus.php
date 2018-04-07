@@ -41,7 +41,6 @@ class Genus
 
     /**
      * @Assert\NotBlank()
-     * @Assert\NotBlank()
      * @ORM\Column(type="date")
      */
     private $firstDiscoveredAt;
