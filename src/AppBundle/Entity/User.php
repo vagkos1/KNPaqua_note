@@ -107,4 +107,9 @@ class User implements UserInterface
     {
         $this->roles = $roles;
     }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
 }

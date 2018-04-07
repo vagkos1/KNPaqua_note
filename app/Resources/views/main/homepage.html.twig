@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="page-header text-center">Welcome to the ocean's library!</h1>
+    <h1 class="page-header text-center">
+        Welcome
+        {#app is the globalvariable in Symfony#}
+        {{ app.user ? app.user.email : 'Aquanauts' }}
+        to the ocean's library!
+    </h1>
 {% endblock %}
