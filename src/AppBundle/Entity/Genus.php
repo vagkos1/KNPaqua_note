@@ -67,30 +67,26 @@ class Genus
      */
     private $funFact;
 
+    /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->notes = new ArrayCollection();
     }
 
-    /**
-     * @return int
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
     public function setName(string $name)
     {
         $this->name = $name;
@@ -125,17 +121,11 @@ class Genus
         $this->speciesCount = $speciesCount;
     }
 
-    /**
-     * @return string
-     */
     public function getFunFact()
     {
         return $this->funFact;
     }
 
-    /**
-     * @param string $funFact
-     */
     public function setFunFact(string $funFact)
     {
         $this->funFact = $funFact;
@@ -146,17 +136,11 @@ class Genus
         return new \DateTime('-'.rand(0,100).'days');
     }
 
-    /**
-     * @param boolean $isPublished
-     */
     public function setIsPublished(bool $isPublished)
     {
         $this->isPublished = $isPublished;
     }
 
-    /**
-     * @return boolean
-     */
     public function getIsPublished()
     {
         return $this->isPublished;
@@ -178,6 +162,16 @@ class Genus
     public function setFirstDiscoveredAt(\DateTime $firstDiscoveredAt = null)
     {
         $this->firstDiscoveredAt = $firstDiscoveredAt;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug)
+    {
+        $this->slug = $slug;
     }
 }
 
