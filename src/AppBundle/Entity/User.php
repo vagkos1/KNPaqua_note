@@ -41,7 +41,9 @@ class User implements UserInterface
      * we are not going to persist this with Doctrine - never store plain text passwords
      * this is just a temporary storage place during a request
      *
-     * @Assert\NotBlank()
+     * we need the following assertion to only apply to the registration form.
+     * when the user wants to update their user info, they may want to keep using the same password :)
+     * @Assert\NotBlank(groups={"Registration"})
      */
     private $plainPassword;
 

@@ -27,7 +27,8 @@ class UserRegistrationForm extends AbstractType
     {
         // bind the form to a class.
         $resolver->setDefaults([
-            'data_class' => User::class
+            'data_class' => User::class,
+            'validation_groups' => ['Default', 'Registration'],
         ]);
     }
 }
