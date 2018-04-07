@@ -36,9 +36,25 @@ class User implements UserInterface
     // this is just a temporary storage place during a request
     private $plainPassword;
 
+    /**
+     * The roles property will hold an array of roles.
+     * When we save, Doctrine will automatically json_encode that array and store it in a singe field.
+     * When we query, it will json_decode that back to the array.
+     * Every user must have at least one role.
+     *
+     * @ORM\Column(type="json_array")
+     */
+    private $roles = [];
+
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+
+        if (!in_array('ROLE_USER', $roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return $roles;
     }
 
     public function getPassword()
@@ -85,5 +101,10 @@ class User implements UserInterface
         // guarantees that the User entity looks "dirty" to Doctrine
         // when changing the plainPassword (since we are not saving the plain password in the DB)
         $this->password = null;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 }
