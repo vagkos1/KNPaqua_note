@@ -7,7 +7,7 @@ security:
 
     role_hierarchy:
 #    if anyone has ROLE_ADMIN, then automatically give them ROLE_MANAGE_GENUS
-        ROLE_ADMIN: [ROLE_MANAGE_GENUS]
+        ROLE_ADMIN: [ROLE_MANAGE_GENUS, ROLE_ALLOWED_TO_SWITCH]
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -28,6 +28,9 @@ security:
 
             logout:
                 path: /logout
+
+            switch_user: ~
+
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
