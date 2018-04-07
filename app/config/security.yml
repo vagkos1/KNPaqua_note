@@ -5,6 +5,10 @@ security:
     encoders:
         AppBundle\Entity\User: bcrypt
 
+    role_hierarchy:
+#    if anyone has ROLE_ADMIN, then automatically give them ROLE_MANAGE_GENUS
+        ROLE_ADMIN: [ROLE_MANAGE_GENUS]
+
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         our_users:
