@@ -57,6 +57,31 @@ class User implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $avatarUri;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isScientist = false;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $universityName;
+
     public function getRoles()
     {
         $roles = $this->roles;
@@ -122,5 +147,55 @@ class User implements UserInterface
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getIsScientist() : bool
+    {
+        return $this->isScientist;
+    }
+
+    public function setIsScientist(bool $iScientist = false): void
+    {
+        $this->isScientist = $iScientist;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName = null): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName = null): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getAvatarUri()
+    {
+        return $this->avatarUri;
+    }
+
+    public function setAvatarUri(string $avatarUri = null): void
+    {
+        $this->avatarUri = $avatarUri;
+    }
+
+    public function getUniversityName()
+    {
+        return $this->universityName;
+    }
+
+    public function setUniversityName($universityName): void
+    {
+        $this->universityName = $universityName;
     }
 }
