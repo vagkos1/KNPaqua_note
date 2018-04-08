@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
@@ -68,6 +69,7 @@ class Genus
     private $funFact;
 
     /**
+     * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(type="string", unique=true)
      */
     private $slug;
