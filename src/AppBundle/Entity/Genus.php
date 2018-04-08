@@ -74,9 +74,22 @@ class Genus
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinTable(name="genus_scientist")
+     */
+    private $genusScientists;
+
+    /**
+     * whenever we have a doctrine relationship where the property is an array of items, we need to initialise
+     * that property in __construct()
+     *
+     * Genus constructor.
+     */
     public function __construct()
     {
         $this->notes = new ArrayCollection();
+        $this->genusScientists = new ArrayCollection();
     }
 
     public function getId()
