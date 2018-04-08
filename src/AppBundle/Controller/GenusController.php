@@ -46,8 +46,9 @@ class GenusController extends Controller
         $genusNote->setCreatedAt(new \DateTime('-1 month'));
         $genusNote->setGenus($genus); // associate this $genusNote with $genus
 
-        // Entity Manager
-        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')
+            ->findOneBy(['email' => 'aquanaut1@example.org']);
+        $genus->addGenusScientist($user);
 
         // Save in the DB!
         $em->persist($genus);
@@ -56,7 +57,7 @@ class GenusController extends Controller
         $em->flush();
 
         return new Response(sprintf(
-            '<html><body>Genus created!<a href="%s">%s</a></body></html>',
+            '<html><body>Genus created! <a href="%s">%s</a></body></html>',
             $this->generateUrl('genus_show', ['slug' => $genus->getSlug()]),
             $genus->getName()
         ));

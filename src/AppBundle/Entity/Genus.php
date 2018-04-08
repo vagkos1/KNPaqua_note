@@ -188,5 +188,15 @@ class Genus
     {
         $this->slug = $slug;
     }
+
+    public function addGenusScientist(User $user)
+    {
+        if ($this->genusScientists->contains($user)) {
+            return;
+        }
+
+        // technically it's an arrayCollection but we can treat it as an array
+        $this->genusScientists[] = $user;
+    }
 }
 
