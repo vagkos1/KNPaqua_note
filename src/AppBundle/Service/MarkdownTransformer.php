@@ -21,7 +21,7 @@ class MarkdownTransformer
         $this->cache = $cache;
     }
 
-    public function parse(string $str) : string
+    public function parse(string $str = null) : string
     {
         $key = md5($str);
         if ($this->cache->contains($key)) {

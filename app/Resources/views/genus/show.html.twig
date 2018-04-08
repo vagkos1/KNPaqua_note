@@ -39,7 +39,7 @@
     {#boot the React app#}
     <script type="text/babel">
         // build a variable to pass to the React app (twig inside javascript!)
-        var notesUrl = '{{ path('genus_show_notes', {'name': genus.name}) }}';
+        var notesUrl = '{{ path('genus_show_notes', {'slug': genus.slug}) }}';
 
         ReactDOM.render(
             // Pass the variable we created before as a prop

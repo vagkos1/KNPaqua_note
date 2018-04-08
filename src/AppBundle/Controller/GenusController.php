@@ -28,10 +28,16 @@ class GenusController extends Controller
      */
     public function newAction() : Response
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $subFamily = $em->getRepository('AppBundle:SubFamily')
+            ->findAny();
+
         $genus = new Genus();
         $genus->setName('Octopus'.rand(1,100));
-        $genus->setSubFamily('Octopodinae');
+        $genus->setSubFamily($subFamily);
         $genus->setSpeciesCount(rand(100, 99999));
+        $genus->setFirstDiscoveredAt(new \DateTime('50 years'));
 
         $genusNote = new GenusNote();
         $genusNote->setUsername('AquaWeaver');
@@ -49,7 +55,11 @@ class GenusController extends Controller
 
         $em->flush();
 
-        return new Response('<html><body>Genus created!</body></html>');
+        return new Response(sprintf(
+            '<html><body>Genus created!<a href="%s">%s</a></body></html>',
+            $this->generateUrl('genus_show', ['slug' => $genus->getSlug()]),
+            $genus->getName()
+        ));
     }
 
     /**
@@ -74,19 +84,11 @@ class GenusController extends Controller
     }
 
     /**
-     * @Route("/genus/{genusName}", name="genus_show")
+     * @Route("/genus/{slug}", name="genus_show")
      */
-    public function showAction(string $genusName) : Response
+    public function showAction(Genus $genus) : Response
     {
         $em = $this->getDoctrine()->getManager();
-
-        /** @var Genus $genus */
-        $genus = $em->getRepository('AppBundle:Genus')
-            ->findOneBy(['name' => $genusName]);
-
-        if (!$genus) {
-            throw $this->createNotFoundException('No genus found');
-        }
 
         $transformer = $this->get('app.markdown_transformer');
         $funFact = $transformer->parse($genus->getFunFact());
@@ -105,7 +107,7 @@ class GenusController extends Controller
      * This powers our React frontend
      * By Typehinting Genus, Symfony will find genus.name (param conversion)
      *
-     * @Route("/genus/{name}/notes", name="genus_show_notes")
+     * @Route("/genus/{slug}/notes", name="genus_show_notes")
      * @Method("GET")
      */
     public function getNotesAction(Genus $genus) : Response
