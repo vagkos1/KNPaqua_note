@@ -198,4 +198,14 @@ class User implements UserInterface
     {
         $this->universityName = $universityName;
     }
+
+    public function getFullName()
+    {
+        return trim($this->firstName . ' ' . $this->lastName);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 }

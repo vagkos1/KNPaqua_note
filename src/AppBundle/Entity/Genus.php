@@ -198,5 +198,13 @@ class Genus
         // technically it's an arrayCollection but we can treat it as an array
         $this->genusScientists[] = $user;
     }
+
+    /**
+     * @return ArrayCollection|User[]
+     */
+    public function getGenusScientists()
+    {
+        return $this->genusScientists;
+    }
 }
 
