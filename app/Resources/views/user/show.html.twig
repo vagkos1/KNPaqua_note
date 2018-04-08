@@ -35,6 +35,20 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-xs-4">
+                <h3>Genus Studied</h3>
+                <ul class="list-group">
+                    {% for genusStudied in user.studiedGenuses %}
+                        <li class="list-group-item">
+                            <a href="{{ path('genus_show', {
+                                slug: genusStudied.slug
+                            }) }}">
+                                {{ genusStudied.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 {% endblock %}
