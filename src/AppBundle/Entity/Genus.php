@@ -199,6 +199,12 @@ class Genus
         $this->genusScientists[] = $user;
     }
 
+    public function removeGenusScientist(User $user)
+    {
+        // remove the $user from the array with an arrayCollection function
+        $this->genusScientists->removeElement($user);
+    }
+
     /**
      * @return ArrayCollection|User[]
      */
