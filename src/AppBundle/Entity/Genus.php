@@ -213,4 +213,3 @@ class Genus
         return $this->genusScientists;
     }
 }
-

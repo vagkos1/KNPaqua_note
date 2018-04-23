@@ -7,6 +7,7 @@ AppBundle\Entity\Genus:
         isPublished: <boolean(75)>
         firstDiscoveredAt: <dateTimeBetween('-200 years', 'now')>
 #        genusScientists: ["@user.aquanaut_1", "@user.aquanaut_5"]
+#        uses the \AppBundle\Entity\Genus::addGenusScientist since there is no \AppBundle\Entity\Genus::setGenusScientists!
         genusScientists: '3x @user.aquanaut_*'
 
 AppBundle\Entity\GenusNote:

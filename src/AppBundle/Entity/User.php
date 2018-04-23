@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\Table(name="user")
  * @UniqueEntity(fields={"email"}, message="It looks like you already have an account!")
  */
@@ -226,6 +226,6 @@ class User implements UserInterface
      */
     public function getStudiedGenuses()
     {
-        return$this->studiedGenuses;
+        return $this->studiedGenuses;
     }
 }
