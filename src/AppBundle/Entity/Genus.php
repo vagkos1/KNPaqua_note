@@ -197,12 +197,22 @@ class Genus
 
         // technically it's an arrayCollection but we can treat it as an array
         $this->genusScientists[] = $user;
+
+        // technically this is not needed for persistence, just keeping both sides in sync
+        $user->addStudiedGenus($this);
     }
 
     public function removeGenusScientist(User $user)
     {
+        if (!$this->genusScientists->contains($user)) {
+            return;
+        }
+
         // remove the $user from the array with an arrayCollection function
         $this->genusScientists->removeElement($user);
+
+        // technically this is not needed for persistence, just keeping both sides in sync
+        $user->removeStudiedGenus($this);
     }
 
     /**
