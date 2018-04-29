@@ -81,6 +81,7 @@ class Genus
      *     fetch="EXTRA_LAZY",
      *     orphanRemoval=true
      * )
+     * @Assert\Valid()
      */
     private $genusScientists;
 
