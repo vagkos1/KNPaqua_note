@@ -8,7 +8,7 @@ AppBundle\Entity\Genus:
         firstDiscoveredAt: <dateTimeBetween('-200 years', 'now')>
 #        genusScientists: ["@user.aquanaut_1", "@user.aquanaut_5"]
 #        uses the \AppBundle\Entity\Genus::addGenusScientist since there is no \AppBundle\Entity\Genus::setGenusScientists!
-        genusScientists: '3x @user.aquanaut_*'
+#        genusScientists: '3x @user.aquanaut_*'
 
 AppBundle\Entity\GenusNote:
     genus.note_{1..100}:
@@ -36,3 +36,9 @@ AppBundle\Entity\User:
         lastName: <lastName()>
         universityName: <company()> University
         avatarUri: <imageUrl(100, 100, 'abstract')>
+
+AppBundle\Entity\GenusScientist:
+    genus.scientist_{1..50}:
+        user: '@user.aquanaut_*'
+        genus: '@genus_*'
+        yearsStudied: <numberBetween(1, 30)>

@@ -75,8 +75,7 @@ class Genus
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User", inversedBy="studiedGenuses", fetch="EXTRA_LAZY")
-     * @ORM\JoinTable(name="genus_scientist")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GenusScientist", mappedBy="genus", fetch="EXTRA_LAZY")
      */
     private $genusScientists;
 
@@ -216,7 +215,7 @@ class Genus
     }
 
     /**
-     * @return ArrayCollection|User[]
+     * @return ArrayCollection|GenusScientist[]
      */
     public function getGenusScientists()
     {
