@@ -75,7 +75,12 @@ class Genus
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GenusScientist", mappedBy="genus", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(
+     *     targetEntity="AppBundle\Entity\GenusScientist",
+     *     mappedBy="genus",
+     *     fetch="EXTRA_LAZY",
+     *     orphanRemoval=true
+     * )
      */
     private $genusScientists;
 
@@ -201,17 +206,17 @@ class Genus
         $user->addStudiedGenus($this);
     }
 
-    public function removeGenusScientist(User $user)
+    public function removeGenusScientist(GenusScientist $genusScientist)
     {
-        if (!$this->genusScientists->contains($user)) {
+        if (!$this->genusScientists->contains($genusScientist)) {
             return;
         }
 
-        // remove the $user from the array with an arrayCollection function
-        $this->genusScientists->removeElement($user);
+        // remove the $genusScientist from the array with an arrayCollection function
+        $this->genusScientists->removeElement($genusScientist);
 
-        // technically this is not needed for persistence, just keeping both sides in sync
-        $user->removeStudiedGenus($this);
+        // needed to update the owning side of the relationship
+        $genusScientist->setGenus(null);
     }
 
     /**
