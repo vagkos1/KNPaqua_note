@@ -48,6 +48,7 @@ class GenusFormType extends AbstractType
             ->add('genusScientists', CollectionType::class, [
                 'entry_type' => GenusScientistEmbeddedForm::class,
                 'allow_delete' => true,
+                'allow_add' => true,
                 'by_reference' => false,
             ])
         ;
@@ -59,10 +60,5 @@ class GenusFormType extends AbstractType
         $resolver->setDefaults([
            'data_class' => 'AppBundle\Entity\Genus'
         ]);
-    }
-
-    public function getBlockPrefix()
-    {
-        return 'app_bundle_genus_form_type';
     }
 }
