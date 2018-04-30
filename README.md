@@ -1,6 +1,18 @@
-aquanote
+Aquanote
 ========
 
-A Symfony 3 project created on February 23, 2018, 12:27 am.
+A Symfony 3.4 project about genuses in the ocean.
+Rerunning KNPUniversity's Symfony full course.
 
-Rerunning KNPUniversity's amazing Symfony 3 full course.
+### To run:
+
+- composer install
+- php bin/console server:run
+- php bin/console doctrine:database:create
+- php bin/console doctrine:migrations:migrate
+- php bin/console doctrine:fixtures:load
+
+Lastly, navigate to /genus or to /admin/genus
+
+##### Login: weaverryan+1@gmail.com
+##### Password: iliketurtles
