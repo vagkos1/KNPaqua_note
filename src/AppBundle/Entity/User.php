@@ -227,26 +227,4 @@ class User implements UserInterface
     {
         return $this->studiedGenuses;
     }
-
-    public function addStudiedGenus(Genus $genus)
-    {
-        if ($this->studiedGenuses->contains($genus)) {
-            return;
-        }
-
-        $this->studiedGenuses[] = $genus;
-
-        // It's the owning side that matters! We need to add the scientist there, thus synchronizing owning/inverse side.
-        $genus->addGenusScientist($this);
-    }
-
-    public function removeStudiedGenus(Genus $genus)
-    {
-        if (!$this->studiedGenuses->contains($genus)) {
-            return;
-        }
-
-        $this->studiedGenuses->removeElement($genus);
-        $genus->removeGenusScientist($this);
-    }
 }

@@ -84,7 +84,9 @@ class GenusAdminController extends Controller
             // gets the session service and adds a flashBag
             $this->addFlash('success', 'Genus updated - you are amazing!');
 
-            return $this->redirectToRoute('admin_genus_list');
+            return $this->redirectToRoute('admin_genus_edit', [
+                'id' => $genus->getId()
+            ]);
         }
 
         return $this->render('admin/genus/edit.html.twig', [
