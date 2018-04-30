@@ -8,6 +8,8 @@ use AppBundle\Repository\UserRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GenusScientistEmbeddedForm extends AbstractType
@@ -22,7 +24,23 @@ class GenusScientistEmbeddedForm extends AbstractType
                     return $repo->createIsScientistQueryBuilder();
                 }
             ])
-            ->add('yearsStudied');
+            ->add('yearsStudied')
+            // onPostSetData() is called after the data behind the form is added to it.
+            // In other words, after the genusScientist is bound to each embedded form
+            ->addEventListener(
+                FormEvents::POST_SET_DATA,
+                [$this, 'onPostSetData']
+            );
+    }
+
+    public function onPostSetData(FormEvent $event)
+    {
+        // $event->getData() returns the data of the GenusScientist bound to the form or null
+        // $event->getData()->getId() returns whether it's been saved to the DB
+        if ($event->getData() && $event->getData()->getId()) {
+            $form = $event->getForm();
+            unset($form['user']);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
