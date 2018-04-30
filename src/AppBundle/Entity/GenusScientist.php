@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="")
  * @ORM\Table(name="genus_scientist")
  * @UniqueEntity(
  *     fields={"genus", "user"},
@@ -17,6 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class GenusScientist
 {
+    const YEARS_FOR_EXPERTISE = 20;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
