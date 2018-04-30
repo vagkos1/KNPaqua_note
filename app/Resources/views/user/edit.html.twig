@@ -7,15 +7,13 @@
                 <h1>Update User</h1>
 
                 {{ form_start(userForm) }}
-                {{ form_errors(userForm) }}
+                    {{ form_row(userForm.email) }}
+                    {{ form_row(userForm.isScientist) }}
+                    {{ form_row(userForm.firstName) }}
+                    {{ form_row(userForm.lastName) }}
+                    {{ form_row(userForm.universityName) }}
 
-                {{ form_row(userForm.email) }}
-                {{ form_row(userForm.isScientist) }}
-                {{ form_row(userForm.firstName) }}
-                {{ form_row(userForm.lastName) }}
-                {{ form_row(userForm.universityName) }}
-
-                <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 {{ form_end(userForm) }}
             </div>
         </div>

@@ -15,11 +15,29 @@
     </div>
 {% endmacro %}
 
+{# Use form_widget to render all the fields at once. Simple, but we lose power over the labels etc.#}
+{# https://symfony.com/doc/current/reference/forms/twig_reference.html#}
+
 {{ form_start(genusForm) }}
-    {# Use form_widget to render all the fields at once. Simple, but we lose power over the labels etc.#}
-    {# https://symfony.com/doc/current/reference/forms/twig_reference.html#}
+
+    {#Prints the global form errors (errors belonging to the whole form, not to each separate field #}
+    {{ form_errors(genusForm) }}
+
     {{ form_row(genusForm.name) }}
-    {{ form_row(genusForm.subFamily) }}
+    {# Each form row can be split into 3 form elements: #}
+    {#{{ form_label(genusForm.name) }}#}
+    {#{{ form_widget(genusForm.name) }}#}
+    {#{{ form_errors(genusForm.name) }}#}
+
+    {{ form_row(genusForm.subFamily, {
+        label: 'Taxonomic SubFamily',
+        attr: {
+            class: 'foo',
+            disabled: 'disabled'
+        }
+    }) }}
+
+
     {{ form_row(genusForm.speciesCount, {
         'label': 'Number of Species'
     }) }}
